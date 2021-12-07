@@ -25,5 +25,6 @@ public class Exam2 {
     //문자열을 표현하는 방법
     return "=> " + name[0] + " , " + name[1] + " , " + name[2] + " , " + name[3] + " , " + name[4] + " , " + name[5] + " , " + name[6];
   }
+  //값을 안주면 빈문자열
 
 }
