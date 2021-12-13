@@ -1,74 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>연락처</title>
-  </head>
-  <body>
-    <h1>연락처</h1>
-    <a href="form.html">새 연락처</a>
-    <table id="x-contact-tbl" border="1">
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>이메일</th>
-          <th>전화</th>
-          <th>회사</th>
-        </tr>
 
-      </thead>
-      <tbody>
-        <tr>
-        </tr>
-      </tbody>
-    </table>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
 
-<script>
-var tbody = document.querySelector("#x-contact-tbl tbody")
+<body>
+  <h1>연락처</h1>
+  <a href="form.html">새 연락처</a>
+  <table id="x-contact-table" border="1">
+    <thead>
+      <tr>
+        <th>이름</th>
+        <th>이메일</th>
+        <th>전화</th>
+        <th>회사</th>
+      </tr>
+    </thead>
+    <!-- tbody에는 데이터 정보 -->
+    <tbody>
+    </tbody>
 
-var contacts = [
-  "홍길동,hong@test.com,010-1111-2222,비트캠프",
-  "홍길동2,hong@test.com,010-1111-2222,비트캠프",
-  "홍길동3,hong@test.com,010-1111-2222,비트캠프",
-]
+  </table>
+  <script type="text/javascript">
+    var tbody = document.querySelector("#x-contact-table tbody")
 
-fetch("/contact/list").then(function(response){
+    // fetch 서버에 요청하고 답을 받음
+    fetch("/contact/list")
+      .then(function(response) {
+        // fetch 실행 오류 처리 방법
+        // if (!response.ok) {
+        //   alert("서버 실행 오류!")
+        //   return
+        // }
+        return response.json()
+      })
+      .then(function(contacts) {
+        console.log(contacts)
+        for (var contact of contacts) {
+          var values = contact.split(",")
+          var tr = document.createElement("tr")
+          tr.innerHTML = `<td><a href="view.html?email=${values[1]}">${values[0]}</td>
+        <td>${values[1]}</td>
+        <td>${values[2]}</td>
+        <td>${values[3]}</td>`
+          tbody.appendChild(tr)
+        }
+      })
+    // 서버실행 오류 처리 방법 1 catch문
+    // .catch(function(error) {
+    //   alert("서버 실행 오류입니다!")
+    //   console.log(error)
+    // })
+  </script>
+</body>
 
-  return response.json()
-
-}).then(function(arr){
-
-  for (var str of arr) { 
-  var contact = str.split(",")
-  var tr = document.createElement("tr")
-  tr.innerHTML = `<td><a href = "view.html?email=${contact[1]}">${contact[0]}</a></td><td>${contact[1]} 
-    </td><td>${contact[2]}</td><td>${contact[3]}</td>`
-  tbody.appendChild(tr)
-
-}
-})
-
-
-
-
-
-
-
-
-
-</script>
-
-
-
-
-
-  </body>
 </html>
-
-
-
-
-
-
-
-
