@@ -8,8 +8,8 @@ public class Exam0451 {
 
     // 위의 방식으로 for 문을 사용할 경우
     // 변수 선언을 바깥에 둘 수 없다.
-    String name;
-    for (name : names) // 컴파일 오류!
+    //String name;
+    for (String name : names) // 컴파일 오류!
       System.out.println(name);
   }
 }
