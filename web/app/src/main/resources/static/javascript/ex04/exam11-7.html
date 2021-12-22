@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ex04</title>
+</head>
+
+<body>
+  <h1>생성자7 - typeof와 instanceof</h1>
+  <script>
+    "use strict"
+
+    function f1() {}
+    function f2() {}
+    function f3() {}
+
+    var obj1 = new f1()
+    var obj2 = new f2()
+    var obj3 = new f3()
+    console.log("-----------------------");
+
+    console.log(typeof obj1);
+    console.log(typeof obj2);
+    console.log(typeof obj3);
+    console.log("-----------------------");
+
+    console.log(obj1 instanceof f1);
+    console.log(obj1 instanceof f2);
+    console.log(obj1 instanceof f3);
+    console.log("-----------------------");
+
+    console.log(obj1 instanceof Object);
+    console.log(obj2 instanceof Object);
+    console.log(obj3 instanceof Object);
+    console.log("-----------------------");
+  </script>
+</body>
+
+</html>
