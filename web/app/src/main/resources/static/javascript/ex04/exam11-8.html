@@ -1,83 +1,117 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="UTF-8">
-  <title>ex04</title>
+<meta charset="UTF-8">
+<title>ex04</title>
 </head>
-
 <body>
-  <h1>생성자8 - 생성자 상속과 instanceof</h1>
-  <script>
-    "use strict"
+<h1>객체 - 생성자 상속과 prototype</h1>
+<script>
+"use strict"
 
-    function f1() {
-      this.name = "홍길동"
-    }
-    
-    f1.prototype.test1 = function() {
-      console.log("test1().....");
-    }
+console.log("----------------------");
+console.log("Objcet 생성자:");
+Object.prototype.test0 = function() { //prototype보관소에 test0라는 함수를 저장
+  //prototype안에는 constructor에 대한 정보가 들어있다
+  console.log("test0() 호출됨!");
+}
+var obj0 = new Object();
+console.log(obj0);
+console.log(obj0.constructor); // obj0의 생성자가 누구냐
+console.log(obj0.prototype); // prototype정보. prototype은 보관소.
 
-    function f2() {
-      f1.call(this)
-      this.email = "hong@test.com"
-    }
-    f2.prototype = Object.create(f1.prototype)
-    f2.prototype.constructor = f2
-    f2.prototype.test2 = function() {
-      console.log("test2().....");
-    }
-
-    function f3() {
-      f2.call(this)
-      this.tel = "010-1111-2222"
-    }
-    f3.prototype = Object.create(f2.prototype)
-    f3.prototype.constructor = f3
-    f3.prototype.test3 = function() {
-      console.log("test3().....");
-    }
+obj0.test0();
 
 
+console.log("----------------------");
+console.log("f1() 생성자:");
+function f1(){
+  this.name = "홍길동";
+}
+f1.prototype.test1 = function() {
+  console.log("test1() 호출됨!");
+}
 
-    var obj1 = new f1()
-    var obj2 = new f2()
-    var obj3 = new f3()
+var obj1 = new f1();
+console.log(obj1);
+console.log(obj1.constructor); // obj0의 생성자가 누구냐
+console.log(f1.prototype); // prototype정보. prototype은 보관소.
 
-    console.log(obj1);
-    console.log(obj2);
-    console.log(obj3);
-    console.log("-----------------------");
+obj1.test1();
+obj1.test0(); //상위 생성자의 프로토타입 호출 가능
+//obj1.testx(); // obj1 ----> f1.prototype ---> Object.prototype ---> null --> is not a function
 
-    obj2.test1()
-    obj2.test2()
-    obj3.test1()
-    console.log("-----------------------");
 
-    console.log(obj3 instanceof f1);
-    console.log(obj3 instanceof f2);
-    console.log(obj3 instanceof f3);
-    console.log(obj3 instanceof Object);
-    console.log("-----------------------");
+console.log("----------------------");
+console.log("f2() 생성자:");
+function f2(){
+  f1.call(this); // 상위 생성자를 호출해야 한다.
+  this.email = "hong@test.com";
+}
+f2.prototype = Object.create(f1.prototype);
+f2.prototype.constructor = f2;
+f2.prototype.test2 = function() {
+console.log("test2() 호출됨!");
+}
 
-    console.log(obj2 instanceof f1);
-    console.log(obj2 instanceof f2);
-    console.log(obj2 instanceof f3);
-    console.log(obj2 instanceof Object);
-    console.log("-----------------------");
+var obj2 = new f2();
+console.log(obj2);
+console.log(obj2.constructor); // obj0의 생성자가 누구냐
+console.log(f2.prototype); // prototype정보. prototype은 보관소.
 
-    console.log(obj1 instanceof f1);
-    console.log(obj1 instanceof f2);
-    console.log(obj1 instanceof f3);
-    console.log(obj1 instanceof Object);
-    console.log("-----------------------");
+obj2.test2();
+obj2.test1();
+obj2.test0(); //상위 생성자의 프로토타입 호출 가능
+//obj2.testx(); // obj2 ----> f2.prototype ---> Object.prototype ---> null --> is not a function
 
-  console.log(obj3.constructor);
-  console.log(obj2.constructor);
-  console.log(obj1.constructor);
 
-  </script>
+
+console.log("----------------------");
+console.log("f3() 생성자:");
+function f3(){
+  f2.call(this); // 상위 생성자를 호출
+  this.tel = "010-1111-2222"
+}
+f3.prototype = Object.create(f2.prototype);
+f3.prototype.constructor = f3;
+f3.prototype.test3 = function() {
+console.log("test3()...");
+}
+
+var obj3 = new f3();
+console.log(obj3);
+console.log(obj3.constructor); // obj0의 생성자가 누구냐
+console.log(f3.prototype); // prototype정보. prototype은 보관소.
+
+obj3.test3();
+obj3.test2();
+obj3.test1();
+obj3.test0(); //상위 생성자의 프로토타입 호출 가능
+//obj3.testx(); // obj2 ----> f2.prototype ---> Object.prototype ---> null --> is not a function
+
+//객체를초기화시킨 생성자가 무엇인지 상관없이 모든 객체의 타입은 object이다
+var obj0 = new Object
+var obj1 = new f1();
+var obj2 = new f2();
+var obj3 = new f3();
+
+console.log(obj0);
+console.log(obj1);
+console.log(obj2);
+console.log(obj3);
+console.log("-----------------------");
+
+console.log(Object.prototype);
+console.log(f1.prototype);
+console.log(f2.prototype);
+console.log(f3.prototype);
+console.log("-----------------------");
+
+obj3.test0();
+obj2.test1();
+obj2.test2();
+obj3.test1();
+console.log("-----------------------");
+</script>
 </body>
-
 </html>
