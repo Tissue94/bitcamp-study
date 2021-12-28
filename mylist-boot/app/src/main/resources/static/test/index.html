@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <h1>게시판</h1>
+  <a href="form.html">새 게시글</a>
+  <table id="x-board-table" border="1">
+    <thead>
+      <tr>
+        <th>제목</th>
+        <th>내용</th>
+        <th>조회수</th>
+        <th>날짜</th>
+      </tr>
+    </thead>
+    <!-- tbody에는 데이터 정보 -->
+    <tbody>
+    </tbody>
+
+  </table>
+  <script type="text/javascript">
+    var tbody = document.querySelector("#x-board-table tbody")
+
+    // fetch 서버에 요청하고 답을 받음
+    fetch("/board/list")
+      .then(function(response) {
+        // fetch 실행 오류 처리 방법
+        // if (!response.ok) {
+        //   alert("서버 실행 오류!")
+        //   return
+        // }
+        return response.json()
+      })
+      .then(function(boards) {
+        console.log(boards)
+        for (var board of boards) {
+          var tr = document.createElement("tr")
+          tr.innerHTML = `<td><a href="view.html?content=${board.content}" onclick="countUp();">${board.title}</a></td>
+        <td>${board.content}</td>
+        <td>${board.viewCount}</td>
+        <td>${board.createDate}</td>`
+          tbody.appendChild(tr)
+        }
+      })
+    // 서버실행 오류 처리 방법 1 catch문
+    // .catch(function(error) {
+    //   alert("서버 실행 오류입니다!")
+    //   console.log(error)
+    // })
+var count = 0;
+function countUp() {
+  count = count + 1;
+  console.log(count);
+}
+
+  </script>
+</body>
+
+</html>
