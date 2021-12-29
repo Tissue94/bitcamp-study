@@ -26,37 +26,30 @@
   <script type="text/javascript">
     var tbody = document.querySelector("#x-board-table tbody")
 
-    // fetch 서버에 요청하고 답을 받음
     fetch("/board/list")
       .then(function(response) {
-        // fetch 실행 오류 처리 방법
-        // if (!response.ok) {
-        //   alert("서버 실행 오류!")
-        //   return
-        // }
+
         return response.json()
       })
       .then(function(boards) {
         console.log(boards)
-        for (var board of boards) {
+        for (var i = 0; i < boards.length; i++) {
           var tr = document.createElement("tr")
-          tr.innerHTML = `<td><a href="view.html?content=${board.content}" onclick="countUp();">${board.title}</a></td>
+          tr.setAttribute("data-no", i);
+          var board = boards[i];
+          tr.innerHTML = `<td class="ab-${i}"><a href= "view.html?content=${board.content}" onclick="countUp(${i});">${board.title}</a></td>
         <td>${board.content}</td>
-        <td>${board.viewCount}</td>
+        <td><input type="text" id="counting-${i}"/></td>
         <td>${board.createDate}</td>`
           tbody.appendChild(tr)
         }
       })
-    // 서버실행 오류 처리 방법 1 catch문
-    // .catch(function(error) {
-    //   alert("서버 실행 오류입니다!")
-    //   console.log(error)
-    // })
-var count = 0;
-function countUp() {
-  count = count + 1;
-  console.log(count);
-}
+
+    function countUp(no) {
+      var counting = document.getElementById(`counting-${no}`).value
+      counting++;
+      document.getElementById(`counting-${no}`).value = counting;
+    }
 
   </script>
 </body>

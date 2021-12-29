@@ -3,16 +3,16 @@
 
 <head>
   <meta charset="utf-8">
-  <title>게시판 목록</title>
+  <title>게시판</title>
 </head>
 
 <body>
-  <h1>글 상세</h1>
+  <h1>게시글 상세</h1>
   <form>
     제목*: <input id="x-title" type="text"><br>
-    내용*: <input id="x-content" type="text"><br>
-    조회수: <input id="x-viewCount" type="text"><br>
-    날짜: <input id="x-createDate" type="text"><br>
+    내용*: <textarea id="x-content" cols="60" rows="10"></textarea><br>
+    조회수: <span id="x-viewCount" type="text"></span><br>
+    등록날짜: <span id="x-createdDate" type="text"></span><br>
     별표(*) 항목은 필수 입력입니다.<br>
     <button id="x-update-btn" type="button">변경</button>
     <button id="x-delete-btn" type="button">삭제</button>
@@ -32,56 +32,44 @@
     // 2) 쿼리스트링에서 이메일 값을 추출한다.
     var qs = arr[1]
     console.log(qs);
-    var content = null
-    var params = new URLSearchParams(qs)
-    var content = params.get("content")
-    // 위의 작업
-    // var values = qs.split("&")
-    //
-    // for (var value of values) {
-    //   if (value.startsWith("email=")) {
-    //     email = value.split("=")[1]
-    //     break
-    //   }
-    // }
 
-    if (content == null) {
-      alert("제목 값이 없습니다.")
+    var params = new URLSearchParams(qs)
+    var index = params.get("index")
+
+    if (index == null) {
+      alert("값이 없습니다.")
       throw "파라미터 오류!"
     }
 
-    console.log(content);
-
-    var xContent = document.querySelector("#x-content")
     var xTitle = document.querySelector("#x-title")
+    var xContent = document.querySelector("#x-content")
     var xViewCount = document.querySelector("#x-viewCount")
-    var xCreateDate = document.querySelector("#x-createDate")
+    var xCreatedDate = document.querySelector("#x-createdDate")
 
     // 3) 서버에서 데이터 가져오기
-    fetch(`/board/get?content=${content}`)
+    fetch(`/board/get?index=${index}`)
       .then(function(response) {
         return response.json()
       })
       .then(function(board) {
-        console.log(board);
 
         // 4) 연락처 상세 정보 화면에 출력
-        xContent.value = board.content
         xTitle.value = board.title
-        xViewCount.value = board.viewCount
-        xCreateDate.value = board.createDate
+        xContent.value = board.content
+        xViewCount.innerHTML = board.viewCount
+        xCreatedDate.innerHTML = board.createdDate
       })
 
 
 
     document.querySelector("#x-update-btn").onclick = function() {
 
-      if (xContent.value == "" || xTitle.value == "") {
+      if (xTitle.value == "" || xContent.value == "") {
         alert("필수 입력 항목이 비어 있습니다.")
         return
       }
 
-      fetch(`/board/update?title=${xTitle.value}&content=${xContent.value}&viewcount=${xViewCount.value}&createdate=${xCreateDate.value}`)
+      fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}`)
         .then(function(response) {
           // 문자열을 넘겼기 때문에 제이슨이 아니다 따라서 텍스트로 받는다
           // 제이슨 형식의 문자열은 양쪽 끝에 "가 붙어야 한다
@@ -97,7 +85,7 @@
     }
 
     document.querySelector("#x-delete-btn").onclick = function() {
-      fetch(`/board/delete?content=${content}`)
+      fetch(`/board/delete?index=${index}`)
         .then(function(response) {
           return response.json()
         })
