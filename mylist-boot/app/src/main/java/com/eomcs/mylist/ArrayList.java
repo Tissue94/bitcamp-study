@@ -42,6 +42,9 @@ public class ArrayList {
   }
 
   static Object remove(int index) {
+    if (index < 0 || index >= size) { 
+      return null;
+    }
     Object old = list[index];
     for (int i = index + 1; i < size; i++) {
       list[i - 1] = list[i];
