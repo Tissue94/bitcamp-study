@@ -1,6 +1,5 @@
 package com.eomcs.mylist;
 
-
 public class Board {
   String title;
   String content;
