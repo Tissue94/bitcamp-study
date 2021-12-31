@@ -128,7 +128,7 @@ public class Exam0112 {
 // ## 인스턴스의 각 변수(항목; field)에 접근하기
 // - 문법:
 //   레퍼런스명.항목명 = 값;
-//   예) Score s = new Score(); ===> null point exception
+//   예) Score s = new Score();   Score s; 만 하면 ===> null point exception??
 //       s.name = "홍길동";
 //
 

@@ -8,6 +8,9 @@ public class Exam0710 {
     // 다른 패키지의 클래스 사용
     // => 패키지 이름을 항상 붙여야 한다.
     //    그래야만 컴파일러가 해당 클래스를 찾을 수 있다.
+    // 반드시 절대경로를 적어야 한다
+    // 패키지 전체 이름을 붙여야 한다
+    // sub.y2 obj = new sub.y2() 오류
     com.eomcs.oop.ex01.sub.Y2 obj;
     obj = new com.eomcs.oop.ex01.sub.Y2();
 
