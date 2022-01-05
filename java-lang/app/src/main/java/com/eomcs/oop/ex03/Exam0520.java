@@ -4,6 +4,7 @@ package com.eomcs.oop.ex03;
 import java.sql.Date;
 
 public class Exam0520 {
+
   static class A {
     byte b2;
     short s2;
@@ -22,7 +23,7 @@ public class Exam0520 {
     // 인스턴스 변수도 클래스 변수와 마찬가지이다.
     // 힙(heap)에 생성되는 인스턴스 필드(변수)는 자동으로 초기화된다.
     // 그래서 인스턴스 필드(변수)는 생성되는 즉시 0으로 초기화 된다.
-    // => 정수(byte, short, int, long, char) : 0
+    // => 정수(byte, short, int, long, char) : 0 
     // => 부동소수점(float, double) : 0.0 = 0
     // => 논리(boolean) : false = 0
     // => 레퍼런스: null = 0

@@ -37,6 +37,7 @@ public class Exam0440 {
     }
 
     public void compute() {
+      // this("오호라") ==> 오류! 일반 메서드에서 생성자를 호출 할 수 없다!
       this.sum = this.kor + this.eng + this.math;
       this.average = this.sum / 3f;
     }
