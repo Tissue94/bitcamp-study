@@ -10,6 +10,7 @@ public class Exam0210 {
     char c = s1.charAt(1);
     System.out.println(c);
 
+    // 알파벳 자리수
     System.out.println(s1.compareTo("Helli"));
     System.out.println(s1.compareTo("Hello"));
     System.out.println(s1.compareTo("Hellq"));
@@ -57,7 +58,7 @@ public class Exam0210 {
     System.out.println(s4);
 
     // => 구분자와 문자열들을 파라미터로 받아서 새 문자열을 만든다.
-    String s5 = String.join(":", "홍길동", "임꺽정", "유관순");
+    String s5 = String.join("과 ", "홍길동", "임꺽정", "유관순");
     System.out.println(s5);
 
     // => primitive 값을 문자열로 만든다.

@@ -21,6 +21,7 @@ public class Exam0130 {
 
     System.out.println(c1.get(Calendar.MILLISECOND));
     System.out.println(c2.get(Calendar.MILLISECOND));
+    System.out.println(c1.getTime());
 
     // getInstance() 호출 시점의 시각이 다르기 때문에 두 객체의 주소는 다르다.
 

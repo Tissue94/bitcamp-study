@@ -13,9 +13,9 @@ public class Exam0220 {
     // 대신 다음과 같이 클래스 메서드를 사용하여 Integer 인스턴스를 생성하라!
     Integer i1 = Integer.valueOf(100);
     Integer i2 = Integer.valueOf(200);
-    Integer i3 = Integer.valueOf(300);
+    Integer i3 = Integer.valueOf(500);
 
-    // 인스턴스 메서드 사용
+    // 인스턴스 메서드 사용 같으면 1 다르면 -1
     System.out.println(i2.compareTo(i1));
     System.out.println(i2.compareTo(i3));
 
