@@ -14,6 +14,9 @@ public class BoardController {
   // => int size = 0;
   ArrayList boardList = new ArrayList();
 
+  public BoardController() {
+    System.out.println("BoardController() 호출됨!");
+  }
 
   @RequestMapping("/board/list")
   public Object list() {

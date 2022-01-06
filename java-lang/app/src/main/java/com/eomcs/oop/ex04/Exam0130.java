@@ -20,7 +20,7 @@ public class Exam0130 {
     Calendar c2 = Calendar.getInstance();
     System.out.println(c1 == c2);
 
-    System.out.println(c1.get(1)); // Calendar.YEAR -> 년도
+    System.out.println(c1.get(1)); // 1은 Calendar.YEAR을 뜻한다. -> 년도
     System.out.println(c2.get(Calendar.YEAR));
     System.out.println(c1.getTime());
 

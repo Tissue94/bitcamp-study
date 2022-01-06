@@ -13,6 +13,9 @@ public class ContactController {
   // => int size = 0;
   ArrayList contactList = new ArrayList();
 
+  public ContactController() {
+    System.out.println("ContactController() 호출됨!");
+  }
 
   @RequestMapping("/contact/list")
   public Object list() {
