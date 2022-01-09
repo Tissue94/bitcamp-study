@@ -136,6 +136,8 @@
       titleInput.value = titleSpan.innerHTML;
       titleInput.setAttribute("data-no", no);
       titleTd.appendChild(titleInput);
+      // appendChild 메서드는 append 메서드와는 달리 오직 Node 객체만 받을 수 있다.
+      // append는 여러 개의 노드와 문자를 추가할 수 있는 반면에 appendChild는 한번에 오직 하나의 노드만 추가할 수 있다.
       titleInput.style["display"] = "";
 
     }
