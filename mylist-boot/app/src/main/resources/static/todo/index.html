@@ -35,6 +35,7 @@
     "use strict"
 
     var titleInput = document.querySelector("#x-title-input");
+    // querySelector는 엘리먼트 형식으로 가져온다 titleInput엘리먼트다
     titleInput.style["display"] = "none";
 
     var tbody = document.querySelector("#x-todo-table tbody");
@@ -68,6 +69,7 @@
         for (var i = 0; i < todoList.length; i++) {
           var tr = document.createElement("tr");
           tr.setAttribute("data-no", i);
+          // 속성 값을 설정 get은 그 설정값을 가져온다.
           var checkedOption = "";
           var titleTdOption = "";
           if (todoList[i].done) {
@@ -121,6 +123,9 @@
     function updateTodo(no) {
       // 현재 Todo 항목을 편집 중인 상태에서 변경 버튼을 눌렀다면
       if (titleInput.parentNode instanceof HTMLTableCellElement) {
+        // 모든 엘리먼트는 생성자가 있다. cell은 td를 가르킨다. 모든 생성자에는 타입이 지정되 있고
+        // instanceof는 타입을 비교하는 것
+        // 엘리먼트는 href 등  많은 정보를 알 수 있다.
         //
         // 다른 항목을 편집하기 위해 이동하기 전에 편집 전의 상태로 되돌린다.
         titleInput.parentNode.querySelector("span").style["display"] = "";
@@ -134,6 +139,8 @@
       titleInput.style["display"] = "";
 
     }
+// keydown keypress keyup 하나라도 실행되면 3개가 모두 실행된다.
+// mousedown mouseup onclick 하나라도 실행되면 3개가 모두 실행된다.
 
     titleInput.onkeyup = function(e) {
       var no = titleInput.getAttribute("data-no");
@@ -160,7 +167,7 @@
     };
 
     function cancelTodoEditing() {
-      titleInput.parentNode.querySelector("span").style["display"] = "";
+      titleInput.parentNode.querySelector("span").style["display"] = ""; // 상위 태그의 스타일 대로
       titleInput.style["display"] = "none";
       document.body.appendChild(titleInput);
     }
