@@ -3,6 +3,7 @@ package com.eomcs.mylist.controller;
 import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.io.FileReader2;
 import com.eomcs.io.FileWriter2;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.util.ArrayList;
@@ -10,19 +11,16 @@ import com.eomcs.util.ArrayList;
 @RestController 
 public class BoardController {
 
-  // Board 객체 목록을 저장할 메모리 준비
-  // => Objec[] list = new Object[5];
-  // => int size = 0;
   ArrayList boardList = new ArrayList();
 
-  public BoardController() throws Exception{
+  public BoardController() throws Exception {
     System.out.println("BoardController() 호출됨!");
-
-    com.eomcs.io.FileReader2 in = new com.eomcs.io.FileReader2("boards.csv");
+    FileReader2 in = new FileReader2("boards.csv");
 
     String line;
-    while ((line = in.readLine()).length() != 0) { // 빈줄을 리턴 받았으면 읽기를 종료한다.
-      boardList.add(Board.valueOf(line));   // 파일에서 읽은 한 줄의 CSV 데이터로 객체를 만든 후 목록에 등록한다.
+    while ((line = in.readLine()).length() != -1) {
+
+      boardList.add(Board.valueOf(line)); 
     }
 
     in.close();
@@ -35,6 +33,7 @@ public class BoardController {
 
   @RequestMapping("/board/add")
   public Object add(Board board) {
+
     board.setCreatedDate(new Date(System.currentTimeMillis()));
     boardList.add(board);
     return boardList.size();
@@ -43,49 +42,50 @@ public class BoardController {
 
   @RequestMapping("/board/get")
   public Object get(int index) {
-    if (index < 0 || index >= boardList.size()){
+    if (index < 0 || index >= boardList.size()) {
       return "";
     }
-    Board board = (Board)boardList.get(index);
+    Board board = (Board) boardList.get(index);
     board.setViewCount(board.getViewCount() + 1);
-    return boardList.get(index);
+
+    return board;
   }
 
   @RequestMapping("/board/update")
   public Object update(int index, Board board) {
-    if (index < 0 || index >= boardList.size()){
+    if (index < 0 || index >= boardList.size()) {
       return 0;
     }
-    Board old = (Board)boardList.get(index);
+
+    Board old = (Board) boardList.get(index);
     board.setViewCount(old.getViewCount());
     board.setCreatedDate(old.getCreatedDate());
+
     return boardList.set(index, board) == null ? 0 : 1;
   }
 
   @RequestMapping("/board/delete")
   public Object delete(int index) {
-    if (index < 0 || index >= boardList.size()){
+    if (index < 0 || index >= boardList.size()) {
       return 0;
     }
-
-    boardList.remove(index);
-    return 1;
+    return boardList.remove(index) == null ? 0 : 1;
   }
 
   @RequestMapping("/board/save")
-  public Object save() throws Exception{
-    FileWriter2 out = new FileWriter2("boards.csv"); // 따로 경로를 지정하지 않으면 프로젝트 폴더에 파일이 생성된다.
+  public Object save() throws Exception {
+    FileWriter2 out = new FileWriter2("boards.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 생성된다.
 
     Object[] arr = boardList.toArray();
     for (Object obj : arr) {
       Board board = (Board) obj;
       out.println(board.toCsvString());
     }
+
     out.close();
     return arr.length;
   }
 }
-
 
 
 
