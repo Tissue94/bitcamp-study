@@ -26,7 +26,6 @@ public class Score2 extends Score {
 //  public int music;
 //  public int art;
 //
-//
 //// 기존 코드를 변경한다. => 기존의 메서드 재정의 
 //// 오버라이딩 없음!!
 //  public void compute() {
