@@ -9,13 +9,31 @@ public class Score2 extends Score {
   public int art;
 
 
-  // 기존 코드를 변경한다.
+  // 기존 코드를 변경한다. => 기존의 메서드 재정의 => 오버라이딩(Overriding)
+  @Override // 컴파일러에게 재정의를 제대로 했는지 검사해달라고 서비스를 요청하는 명령
   public void compute() {
     this.sum = this.kor + this.eng + this.math + this.music + this.art;
     this.aver = this.sum / 5f;
   }
 }
 
+//import com.eomcs.oop.ex05.a.Score;
+//
+//public class Score2 {
+//
+//  Score in;
+//// 새 필드를 추가한다.
+//  public int music;
+//  public int art;
+//
+//
+//// 기존 코드를 변경한다. => 기존의 메서드 재정의 
+//// 오버라이딩 없음!!
+//  public void compute() {
+//    in.sum = in.kor + in.eng + in.math + this.music + this.art;
+//    in.aver = in.sum / 5f;
+//  }
+//}
 
 
 
