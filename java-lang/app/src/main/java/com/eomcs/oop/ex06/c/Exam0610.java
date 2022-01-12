@@ -5,6 +5,7 @@ public class Exam0610 {
 
   static class Car {}
   static class Sedan extends Car {}
+  static class Truck extends Car {}
   static class Tico extends Sedan {}
 
   static class CarFactory {
@@ -18,7 +19,7 @@ public class Exam0610 {
     // 서브 클래스도 가능하다.
     @Override
     Sedan create() {
-      return new Sedan();
+      return new Sedan(); // 리턴타입이 달라도 
     }
   }
 
@@ -31,6 +32,10 @@ public class Exam0610 {
     }
   }
 
+  //  Truck create() { // 오류!
+  //    return new Truck();
+  //  }
+  //}
 
   public static void main(String[] args) {
 
