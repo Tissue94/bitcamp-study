@@ -11,6 +11,7 @@ public class CarTest4 {
 
     Engine car = new Engine();
     car.chargeBattery(100);
+    //car.chargeBattery(0);
     car.start();
     car.run();
     car.stop();
