@@ -20,7 +20,7 @@ public class BookController {
     BufferedReader in = new BufferedReader(new FileReader("books.csv"));
 
     String line;
-    while ((line = in.readLine()) != null) { // readLine()이 null 리턴한다면 더이상 읽을 데이터가 없다는 뜻
+    while ((line = in.readLine()) != null) { 
       bookList.add(Book.valueOf(line)); 
     }
     in.close();

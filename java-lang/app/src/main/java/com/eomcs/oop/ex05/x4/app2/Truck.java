@@ -8,4 +8,11 @@ public class Truck extends Car{
     System.out.println("짐 내린다!");
   }
 
+  @Override
+  public void run() {
+
+    System.out.println("덜컹덜컹 달린다!");
+
+  }
+
 }

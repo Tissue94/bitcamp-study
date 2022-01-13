@@ -22,10 +22,10 @@ public class BoardController {
     FileReader in = new FileReader("boards.csv");
 
     //2) 한 줄 단위로 데이터를 읽는 작업을 수행하는 데코레이터 준비
-    BufferedReader in2 = new BufferedReader(in);
+    BufferedReader in2 = new BufferedReader(in);  // BufferedReader 한줄씩 잘라주는 기능
 
     String line;
-    while ((line = in2.readLine()) != null) { // 한줄의 문자열을 읽었으면,
+    while ((line = in2.readLine()) != null) { // // readLine()이 null 리턴한다면 더이상 읽을 데이터가 없다는 뜻
       boardList.add(Board.valueOf(line)); 
     }
 

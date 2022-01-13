@@ -1,11 +1,13 @@
 package com.eomcs.oop.ex05.x1.upgrade5;
 
+import com.eomcs.oop.ex05.x1.Calculator;
+
 public class Calculator2 {
 
   // 의존 객체를 외부에서 주입받는다.
-  com.eomcs.oop.ex05.x1.Calculator origin;
+  Calculator origin;
 
-  public Calculator2(com.eomcs.oop.ex05.x1.Calculator origin) {
+  public Calculator2(Calculator origin) {
     this.origin = origin;
   }
 

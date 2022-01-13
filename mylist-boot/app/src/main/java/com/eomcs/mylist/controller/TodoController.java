@@ -17,7 +17,7 @@ public class TodoController {
   public TodoController() throws Exception {
     System.out.println("TodoController() 호출됨!");
 
-    BufferedReader in = new BufferedReader(new FileReader("todos.csv")); // BufferedReader 한줄씩 잘라주는 기능
+    BufferedReader in = new BufferedReader(new FileReader("todos.csv"));
 
     String line;
     while ((line = in.readLine()) != null) {
