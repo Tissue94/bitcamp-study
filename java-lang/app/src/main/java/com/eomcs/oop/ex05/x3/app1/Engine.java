@@ -5,9 +5,7 @@ public class Engine {
   int valve;
 
   public void run() {
-
     System.out.println("엔진이 돈다!");
-
   }
 
   //자동차 기능 추가

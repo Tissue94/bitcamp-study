@@ -6,8 +6,8 @@ public class Engine {
 
   public void run() {
 
-    System.out.println("엔진이 돈다!");
-
+    // System.out.println("엔진이 돈다!");
+    System.out.println("엔진이 씽씽!");
   }
 
 
