@@ -1,10 +1,10 @@
-package com.eomcs.oop.ex05.x2.app1;
+package com.eomcs.oop.ex05.x3.app1;
 
 import com.eomcs.oop.ex05.x2.Engine;
 
 // 자동차 만들기
 
-// 1) 기존 코드에 기능 덧붙이기
+// 1) 기존 코드를 복사해 온 후 기능 덧붙이기
 
 public class CarTest1 {
 

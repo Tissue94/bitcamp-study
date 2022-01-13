@@ -1,6 +1,4 @@
-package com.eomcs.oop.ex05.x2.app1;
-
-import com.eomcs.oop.ex05.x2.Engine;
+package com.eomcs.oop.ex05.x2;
 
 // 트럭 만들기
 
