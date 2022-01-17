@@ -26,7 +26,7 @@ public class Exam0710_02 {
     printList(dir);
   }
 
-  static void printList(File dir) {
+  static void printList(File dir) { // 현재 파일/디렉토리를 파라미터로 받는 스태틱 메서드 준비
     
   }
 }
