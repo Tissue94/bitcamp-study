@@ -21,7 +21,7 @@ public class Exam0610 {
         // false를 리턴하면 배열에 포함되지 않는다.
 
         // 파일,디렉토리 이름이 .java 로 끝나는 경우만 리턴 배열에 포함시키다.
-        if (name.endsWith(".java"))
+        if (name.endsWith(".java")) // endsWith() -> 문자열의 끝이 .java로 끝나나 안끝나나 검사!  startsWith -> 문자열의 시작
           return true; // 조회 결과에 포함시켜라!
         return false; // 조회 결과에서 제외하라!
       }
@@ -34,7 +34,7 @@ public class Exam0610 {
     JavaFilter javaFilter = new JavaFilter();
 
     // 2) 필터를 사용하여 디렉토리의 목록을 가져오기
-    String[] names = dir.list(javaFilter);
+    String[] names = dir.list(javaFilter); // FilenameFilter의 규칙에 따라 만들어진 파라미터가 필요하다. 이름만 같다고 같은 규칙이 아니다.
 
     for (String name : names) {
       System.out.println(name);
