@@ -13,10 +13,9 @@ public class Exam0730test {
 
     printClasses(dir);
   }
-
   static void printClasses(File dir) {
 
-    class JavaFileFilter implements FileFilter {
+    class JavaClassFilter implements FileFilter {
 
       @Override
       public boolean accept(File pathname) {
@@ -26,8 +25,9 @@ public class Exam0730test {
         return false;
       }
     }
-    File[] file = dir.listFiles(new JavaFileFilter());
-    for (File f : file) {
+
+    File[] files = dir.listFiles(new JavaClassFilter());
+    for(File f : files) {
       if (f.isDirectory()) {
         printClasses(f);
       } else {
@@ -35,6 +35,8 @@ public class Exam0730test {
       }
     }
   }
+
+
 
 
 }
