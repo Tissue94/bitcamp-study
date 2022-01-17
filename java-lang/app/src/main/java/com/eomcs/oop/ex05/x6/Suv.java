@@ -1,5 +1,7 @@
 package com.eomcs.oop.ex05.x6;
 
+// Specialization
+
 public class Suv extends Car{
   boolean enabled4wd;
 
