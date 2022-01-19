@@ -2,10 +2,10 @@ package com.eomcs.mylist.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Todo;
@@ -19,21 +19,15 @@ public class TodoController {
   public TodoController() throws Exception {
     System.out.println("TodoController() 호출됨!");
 
-    DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("todos.data")));
+    try {
+      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("todos.ser2")));
 
-    while (true) { 
-      try {
-        Todo todo = new Todo();
-        todo.setTitle(in.readUTF());
-        todo.setDone(in.readBoolean());
+      todoList = (ArrayList) in.readObject();
 
-        todoList.add(todo); 
-
-      } catch (Exception e) {
-        break;
-      }
+      in.close();
+    } catch (Exception e) {
+      System.out.println("해야할일 데이터 로딩 중 오류 발생!");
     }
-    in.close();
     //in.close(); 데코레이터를 close() 하면 그 데코레이터와 연결된 객체들도 모두 close() 된다.
   }
 
@@ -82,18 +76,13 @@ public class TodoController {
 
   @RequestMapping("/todo/save")
   public Object save() throws Exception {
-    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("todos.data")));
+    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("todos.ser2")));
 
 
-    Object[] arr = todoList.toArray();
-    for (Object obj : arr) {
-      Todo todo = (Todo) obj;
-      out.writeUTF(todo.getTitle());
-      out.writeBoolean(todo.isDone());
-    }
+    out.writeObject(todoList);
 
     out.close();
-    return arr.length;
+    return todoList.size();
   }
 }
 
