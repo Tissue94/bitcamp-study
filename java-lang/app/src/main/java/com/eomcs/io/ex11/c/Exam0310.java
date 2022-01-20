@@ -7,8 +7,8 @@ import java.io.ObjectOutputStream;
 public class Exam0310 {
 
   public static void main(String[] args) throws Exception {
-    FileOutputStream fileOut = new FileOutputStream("temp/member3.data");
-    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("temp/member3.data"));
 
     Member member = new Member();
     member.name = "AB가각간";

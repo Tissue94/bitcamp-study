@@ -7,8 +7,8 @@ import java.io.ObjectInputStream;
 public class Exam0320 {
 
   public static void main(String[] args) throws Exception {
-    FileInputStream fileIn = new FileInputStream("temp/member3.data");
-    ObjectInputStream in = new ObjectInputStream(fileIn);
+
+    ObjectInputStream in = new ObjectInputStream(new FileInputStream("temp/member3.data"));
 
 
     Member member = (Member) in.readObject();
