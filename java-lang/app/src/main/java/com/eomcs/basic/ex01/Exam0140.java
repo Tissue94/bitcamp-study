@@ -19,8 +19,10 @@ public class Exam0140 {
 
     // Object에서 상속 받은 hashCode()는 인스턴스마다 고유의 4바이트 정수 값을 리턴한다.
     // => 이 값은 toString()의 출력 값으로 사용된다.
-    System.out.println(Integer.toHexString(obj1.hashCode()));
+    System.out.println(Integer.toHexString(obj1.hashCode())); // 기본 obj1.hashCode()은 10진법
     System.out.println(Integer.toHexString(obj2.hashCode()));
+
+    // 절대 인스턴스 주소가 아니다. java에서는 인스턴스 주소를 구할 수 없다.
 
     System.out.println(obj1);
     System.out.println(obj2);
