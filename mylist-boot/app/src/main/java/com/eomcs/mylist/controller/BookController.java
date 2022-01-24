@@ -24,15 +24,9 @@ public class BookController {
       ObjectMapper mapper = new ObjectMapper();
 
 
-      String jsonStr = in.readLine();
+      bookList = new ArrayList(mapper.readValue(in.readLine(), Book[].class));
 
-
-      Book[] books = mapper.readValue(jsonStr, Book[].class);
-
-
-      for (Book book : books) {
-        bookList.add(book);
-      }
+      in.close();
     } catch (Exception e) {
       System.out.println("독서록 데이터 로딩 중 오류 발생!");
     }

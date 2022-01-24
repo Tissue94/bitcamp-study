@@ -23,18 +23,13 @@ public class BoardController {
     try {
       BufferedReader in = new BufferedReader(new FileReader("boards.json"));
 
+      // JSON 문자열을 다룰 객체 준비
       ObjectMapper mapper = new ObjectMapper();
 
 
-      String jsonStr = in.readLine();
 
+      boardList = new ArrayList(mapper.readValue(in.readLine(), Board[].class));
 
-      Board[] boards = mapper.readValue(jsonStr, Board[].class);
-
-
-      for (Board board : boards) {
-        boardList.add(board);
-      }
 
       in.close();
     } catch (Exception e) {
