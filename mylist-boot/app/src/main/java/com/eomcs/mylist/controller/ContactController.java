@@ -1,15 +1,15 @@
 package com.eomcs.mylist.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Contact;
 import com.eomcs.util.ArrayList;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 //1) 생성자에서 FileReader 객체를 준비한다.
 //2) 파일에서 문자를 읽어 출력한다.
@@ -31,9 +31,20 @@ public class ContactController {
     System.out.println("ContactController() 호출됨!");
 
     try {
-      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("contacts.ser2")));
+      BufferedReader in = new BufferedReader(new FileReader("contacts.json"));
 
-      contactList = (ArrayList) in.readObject();
+      ObjectMapper mapper = new ObjectMapper();
+
+
+      String jsonStr = in.readLine();
+
+
+      Contact[] contacts = mapper.readValue(jsonStr, Contact[].class);
+
+
+      for (Contact contact : contacts) {
+        contactList.add(contact);
+      }
 
       in.close();
     } catch (Exception e) {
@@ -87,9 +98,18 @@ public class ContactController {
 
   @RequestMapping("/contact/save")
   public Object save() throws Exception {
-    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("contacts.ser2")));
+    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("contacts.json")));
 
-    out.writeObject(contactList);
+    // JSON 형식의 문자열을 다룰 객체를 준비한다.
+    ObjectMapper mapper = new ObjectMapper();
+
+    // 1) 객체를 JSON형식의 문자열로 생성한다.
+    // ArrayList 에서 board 배열을 꺼낸 후 JSON 문자열로 만든다.
+    String jsonStr = mapper.writeValueAsString(contactList.toArray());
+
+    // 2) JSON 형식으로 바꾼 문자열을 파일로 출력한다.
+    out.println(jsonStr);
+
 
     out.close();
     return contactList.size();
