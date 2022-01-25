@@ -5,6 +5,11 @@ import com.eomcs.mylist.domain.Board;
 import com.eomcs.util.ArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+// @Reapository
+// 클래스에 이 애노테이션을 붙여 표시해두면, Spring Boot가 실행 될 때 이 클래스의 객체를 자동 생성한다.
+// 또한 이 객체를 원하는 곳에 자동으로 주입한다.
+//
+// @Repository 
 public class JsonBoardDao implements BoardDao{
 
   String filename = "boards.json";

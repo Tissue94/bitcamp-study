@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.util.ArrayList;
 
+//@Repository
 public class SerialBoardDao implements BoardDao{
 
   String filename = "boards.ser";
