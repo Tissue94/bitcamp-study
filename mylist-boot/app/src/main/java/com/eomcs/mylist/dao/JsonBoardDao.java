@@ -1,47 +1,30 @@
 package com.eomcs.mylist.dao;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.File;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.util.ArrayList;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CsvBoardDao implements BoardDao{
+public class JsonBoardDao implements BoardDao{
 
+  String filename = "boards.json";
   ArrayList boardList = new ArrayList(); // 변수 선언 = 변수를 만들라는 명령
 
-  public CsvBoardDao() {
+  public JsonBoardDao() {
     try {
-      BufferedReader in = new BufferedReader(new FileReader("boards.csv"));
+      ObjectMapper mapper = new ObjectMapper();
+      boardList.addAll(mapper.readValue(new File(filename), Board[].class));
 
-      String csvStr;
-
-
-      while ((csvStr = in.readLine()) != null) {
-
-        boardList.add(Board.valueOf(csvStr)); 
-
-      }
-
-      in.close();
     } catch (Exception e) {
       System.out.println("게시글 데이터 로딩 중 오류 발생!");
     }
   }
 
   private void save() throws Exception{
-    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("boards.csv")));
 
-    for (int i = 0; i < boardList.size(); i++) {
-      Board board = (Board) boardList.get(i);
-      out.println(board.toCsvString());
-    }
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(new File(filename), boardList.toArray());    
 
-    out.flush();
-
-    out.close();
   }
 
   @Override
