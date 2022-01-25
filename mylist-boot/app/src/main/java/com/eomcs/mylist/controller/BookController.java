@@ -1,91 +1,56 @@
 package com.eomcs.mylist.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.mylist.dao.BookDao;
 import com.eomcs.mylist.domain.Book;
-import com.eomcs.util.ArrayList;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController 
 public class BookController {
 
-  ArrayList bookList = new ArrayList();
-
-  public BookController() throws Exception {
-    System.out.println("BookController() 호출됨!");
-    try {
-      BufferedReader in = new BufferedReader(new FileReader("books.json"));
-
-      ObjectMapper mapper = new ObjectMapper();
-
-
-      bookList = new ArrayList(mapper.readValue(in.readLine(), Book[].class));
-
-      in.close();
-    } catch (Exception e) {
-      System.out.println("독서록 데이터 로딩 중 오류 발생!");
-    }
-  }
+  @Autowired
+  BookDao bookDao;
 
   @RequestMapping("/book/list")
   public Object list() {
-    return bookList.toArray(); 
+    return bookDao.findAll(); 
   }
 
   @RequestMapping("/book/add")
-  public Object add(Book book) {
-    bookList.add(book);
-    return bookList.size();
+  public Object add(Book book) throws Exception{
+    bookDao.insert(book);
+    return bookDao.countAll();
   }
 
-
   @RequestMapping("/book/get")
-  public Object get(int index) {
-    if (index < 0 || index >= bookList.size()) {
+  public Object get(int index) throws Exception{
+    Book book = bookDao.findByNo(index);
+    if (book == null) {
       return "";
     }
-    return bookList.get(index);
+    return book;
   }
 
   @RequestMapping("/book/update")
-  public Object update(int index, Book book) {
-    if (index < 0 || index >= bookList.size()) {
+  public Object update(int index, Book book) throws Exception{
+    Book old = bookDao.findByNo(index);
+    if (old == null) {
       return 0;
     }
-    return bookList.set(index, book) == null ? 0 : 1;
+    return bookDao.update(index, book);
   }
 
   @RequestMapping("/book/delete")
-  public Object delete(int index) {
-    if (index < 0 || index >= bookList.size()) {
+  public Object delete(int index) throws Exception{
+    Book old = bookDao.findByNo(index);
+    if (old == null) {
       return 0;
     }
-    return bookList.remove(index) == null ? 0 : 1;
+
+    return bookDao.delete(index);
   }
 
-  @RequestMapping("/book/save")
-  public Object save() throws Exception {
-
-    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("books.json")));
-
-    // JSON 형식의 문자열을 다룰 객체를 준비한다.
-    ObjectMapper mapper = new ObjectMapper();
-
-    // 1) 객체를 JSON형식의 문자열로 생성한다.
-    // ArrayList 에서 board 배열을 꺼낸 후 JSON 문자열로 만든다.
-    String jsonStr = mapper.writeValueAsString(bookList.toArray());
-
-    // 2) JSON 형식으로 바꾼 문자열을 파일로 출력한다.
-    out.println(jsonStr);
-
-    out.close();
-    return bookList.size();
-  }
 }
 
 

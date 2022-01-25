@@ -2,7 +2,7 @@ package com.eomcs.mylist.dao;
 
 import java.io.File;
 import org.springframework.stereotype.Repository;
-import com.eomcs.mylist.domain.Board;
+import com.eomcs.mylist.domain.Contact;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 // @Reapository
@@ -10,14 +10,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 // 또한 이 객체를 원하는 곳에 자동으로 주입한다.
 //
 @Repository 
-public class JsonBoardDao extends AbstractBoardDao{
+public class JsonContactDao extends AbstractContactDao{
 
-  String filename = "boards.json";
+  String filename = "contacts.json";
 
-  public JsonBoardDao() {
+  public JsonContactDao() {
     try {
       ObjectMapper mapper = new ObjectMapper();
-      boardList.addAll(mapper.readValue(new File(filename), Board[].class));
+      contactList.addAll(mapper.readValue(new File(filename), Contact[].class));
 
     } catch (Exception e) {
       System.out.println("게시글 데이터 로딩 중 오류 발생!");
@@ -28,7 +28,7 @@ public class JsonBoardDao extends AbstractBoardDao{
   protected void save() throws Exception{
 
     ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(new File(filename), boardList.toArray());    
+    mapper.writeValue(new File(filename), contactList.toArray());    
 
   }
 }
