@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>웹계산기</title>
+</head>
+
+<body>
+  <h1>웹 계산기</h1>
+  <form>
+    <input id="x-a" type="text">
+    <select id="x-op">
+    <option value="">연산자 선택</option>
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+    </select>
+    <input id="x-b" type="text">
+    <button id="x-do-btn" type="button">=</button>
+    <input id="x-result" type="text">
+  </form>
+
+  <script type="text/javascript">
+    var xA = document.querySelector("#x-a")
+    var xB = document.querySelector("#x-b")
+    var xOp = document.querySelector("#x-op")
+    var xResult = document.querySelector("#x-result")
+
+    document.querySelector("#x-do-btn").onclick = function() {
+
+      if (xA.value == "" || xB.value == "" ) {
+        alert("값을 입력하세요")
+        return;
+      }
+      
+      if (xOp.value == "") {
+          alert("연산자를 선택하세요")
+          return;
+        }
+
+      
+      fetch(`/calc?op=${encodeURIComponent(xOp.value)}&a=${xA.value}&b=${xB.value}`)
+        .then(function(response) {
+          // 문자열을 넘겼기 때문에 제이슨이 아니다 따라서 텍스트로 받는다
+          // 제이슨 형식의 문자열은 양쪽 끝에 "가 붙어야 한다
+          return response.text()
+        })
+        .then(function(text) {
+          xResult.value = text
+        })
+        
+    }
+
+
+  </script>
+
+
+
+</body>
+
+</html>
