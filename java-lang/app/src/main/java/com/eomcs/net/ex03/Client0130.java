@@ -28,7 +28,8 @@ public class Client0130 {
       System.out.println("서버에 데이터를 보냈음!");
 
       // 서버에서 보낸 int 값을 읽는다.
-      int value = in.readInt();
+      System.out.println("서버의 응답을 기다리고 있음!");
+      int value = in.readInt(); // read할때 블로킹이 걸림 (멈춘다)
       System.out.println(value);
 
     } catch (Exception e) {

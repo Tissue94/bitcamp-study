@@ -24,7 +24,7 @@ public class Server0120 {
         System.out.println("클라이언트가 보낸 100바이트를 기다리고 있음!");
         // => 클라이언트가 100바이트를 보낼 때까지 리턴하지 않는다.
         byte[] buf = new byte[100];
-        int size = in.read(buf);
+        int size = in.read(buf); // 기다린다.
         System.out.printf("읽은 바이트 수: %d\n", size);
 
         for (int i = 0; i < size; i++) {
