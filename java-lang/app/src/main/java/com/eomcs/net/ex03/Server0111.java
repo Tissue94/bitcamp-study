@@ -54,6 +54,8 @@ public class Server0111 {
       }
       System.out.println("클라이언트와의 연결을 끊었음.");
 
+      // finally 없는 이유는 try블럭을 나가면 자동으로 close() 한다.
+
     } catch (Exception e) {
       e.printStackTrace();
 
