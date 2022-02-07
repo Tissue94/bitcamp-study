@@ -27,7 +27,7 @@ public class CalcServer {
 
     @Override
     public void run() {
-      // JVM과 별개로 실행해야 하는 코드를 이 메서드에 둔다.
+      // main 스레드와는 별개로 실행해야 하는 코드를 이 메서드에 둔다.
       try {
         processRequest(socket);
       } catch (Exception e) {
@@ -100,9 +100,9 @@ public class CalcServer {
           break;
         case "*":
           result *= value;
-          Thread.sleep(10000);
           break;
         case "/":
+          Thread.sleep(10000); // 현재 스레드만 sleep 나머지 스레드는 돌아간다.
           result /= value;
           break;
       }
