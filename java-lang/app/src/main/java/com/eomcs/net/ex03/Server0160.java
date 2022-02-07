@@ -1,4 +1,4 @@
-// 클라이언트와 입출력 테스트 - byte stream + buffer
+// 클라이언트와 입출력 테스트 - byte stream + buffer  중요!!!
 package com.eomcs.net.ex03;
 
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ public class Server0160 {
         keyboard.nextLine();
 
         out.println(str);
-        //        out.flush();
+        out.flush();
         // 버퍼를 사용할 때는
         // 데이터를 보내기 위해 반드시 flush()를 호출해야 한다.
         // => 버퍼에 남아 있는 데이터를 연결된 출력 스트림을 이용하여 내보낸다.

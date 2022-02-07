@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Server0140 {
   public static void main(String[] args) {
-    try (Scanner keyboard = new Scanner(System.in);
+    try (Scanner keyboard = new Scanner(System.in); 
         ServerSocket serverSocket = new ServerSocket(8888)) {
 
       System.out.println("클라이언트의 연결을 기다리고 있음.");
