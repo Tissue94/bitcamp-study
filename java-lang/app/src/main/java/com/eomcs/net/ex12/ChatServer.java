@@ -30,14 +30,22 @@ public class ChatServer {
 
   }
 
+  @SuppressWarnings("unchecked")
   public void sendMessage(String message) {
+    ArrayList deleteStreams = new ArrayList();
+
     for (int i = 0; i < clientOutStreams.size(); i++) {
       DataOutputStream out = (DataOutputStream) clientOutStreams.get(i);
       try {out.writeUTF(message);
       } catch (Exception e) {
         System.out.println("전송 오류: " + message);
-        clientOutStreams.remove(i);
+        deleteStreams.add(out); // 무효한 출력 스트림은 삭제 명단에 등록한다. 
+        //(목록 중간을 함부로 삭제하면 안된다. ->삭제 명단 목록에 넣어놓고 밑에 for문에서 삭제 명단 목록을 삭제한다.)
       }
+    }
+
+    for (Object deleteStream : deleteStreams) { // 삭제명단에 등록된 출력 스트림을 제거한다.
+      clientOutStreams.remove(deleteStream);
     }
   }
 
