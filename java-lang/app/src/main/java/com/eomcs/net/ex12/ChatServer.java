@@ -33,7 +33,11 @@ public class ChatServer {
   public void sendMessage(String message) {
     for (int i = 0; i < clientOutStreams.size(); i++) {
       DataOutputStream out = (DataOutputStream) clientOutStreams.get(i);
-      try {out.writeUTF(message);} catch (Exception e) {}
+      try {out.writeUTF(message);
+      } catch (Exception e) {
+        System.out.println("전송 오류: " + message);
+        clientOutStreams.remove(i);
+      }
     }
   }
 
@@ -53,17 +57,20 @@ public class ChatServer {
 
         clientOutStreams.add(out);
 
-        out.writeUTF("환영합니다!");
+        String nickname = in.readUTF();
+
+        out.writeUTF(nickname + "님 환영합니다!");
         out.flush();
 
         while (true) {
           String message = in.readUTF();
           if (message.equals("\\quit")) {
-            out.writeUTF("Goodbye!");
+            out.writeUTF("<![QUIT[]>"); // 연결을 끊겠다는 특별한 메세지 ( 스레드를 종료하겠다는 메세지)
             out.flush();
+            clientOutStreams.remove(out); // 메세지 출력 목록에서 연결이 종료된 클라이언트를 제거한다.
             break;
           }
-          sendMessage(message);
+          sendMessage(String.format("[%s] : %s", nickname, message));
         }
       } catch (Exception e) {
         System.out.println("클라이언트와의 통신 오류! -" + e.getMessage());
