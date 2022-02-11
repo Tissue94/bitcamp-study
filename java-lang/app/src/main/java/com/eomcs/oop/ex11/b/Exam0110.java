@@ -17,4 +17,6 @@ public class Exam0110 {
     obj = new A.X();
   }
 
+  // ex) 안드로이드 OnClickListener 같은 클래스
+
 }

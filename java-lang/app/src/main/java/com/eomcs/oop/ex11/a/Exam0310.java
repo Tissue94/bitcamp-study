@@ -8,6 +8,7 @@ public class Exam0310 {
   protected static class A3 {}
   public static class A4 {}
 
+  // 이너클래스
   private class B1 {} 
   class B2 {}
   protected class B3 {}

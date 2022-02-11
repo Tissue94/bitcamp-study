@@ -9,7 +9,7 @@ public class Exam0311 {
     //    protected class A2 {} // 컴파일 오류!
     //    public class A3 {} // 컴파일 오류!
 
-    class A4 {} // OK!
+    class A4 {} // OK! public을 붙일 수 없다.
   }
 
   void m2() {

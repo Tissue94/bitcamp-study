@@ -15,6 +15,20 @@ class C {
     // - 스태틱 메서드는 인스턴스 주소를 담고 있는 this 변수가 존재하지 않는다.
   }
 
+  int aa;
+
+  void test1() {
+    test2(); // this가 생략되어있다.
+  }
+
+  void test2() {
+    test3(); // this가 생략되어있다.
+  }
+
+  void test3() {
+    m2(); // this가 생략되어있다.
+  }
+
   void m2() {
     // 인스턴스 메서드는 인스턴스 주소를 담고 있는 this 변수가 있다.
     // 그래서 inner class 를 사용할 수 있다.
@@ -38,7 +52,9 @@ public class Exam0310 {
     C.m1();
 
     C outer = new C();
+    outer.aa = 100;
     outer.m2();
+    outer.test1();
   }
 
 }

@@ -10,6 +10,7 @@ class G {
     int v1 = 10;
     int v2 = 20;
 
+
     void m1(int v1) {
 
       // 중첩 클래스의 메서드에서 필드를 사용하기 
