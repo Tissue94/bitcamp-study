@@ -48,8 +48,10 @@ public class Test {
   }
 
   static void printList(LinkedList list) {
-    for(int i = 0; i < list.size; i++) {
-      System.out.print(list.get(i) + ",");
+    // Iterator를 통해 목록에서 값 꺼내기
+    Iterator iterator = list.iterator();
+    while(iterator.hasNext()) {
+      System.out.print(iterator.next()+ ",");
     }
     System.out.println();
     System.out.println("--------------------------");

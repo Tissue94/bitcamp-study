@@ -72,13 +72,14 @@ public class LinkedList {
     Object deleted = node.value;
     node.value = null;
     size--;
-    return deleted;
+    return deleted; // 삭제되기 전의 값 리턴
   }
 
-  public void set(int index, Object value) {
+  public Object set(int index, Object value) {
     Node node = getNode(index);
-
+    Object old = node.value;
     node.value = value;
+    return old; // 변경되기 전의 값 리턴
   }
 
   private Node getNode(int index) {
@@ -96,7 +97,49 @@ public class LinkedList {
     return node;
   }
 
+  public Iterator iterator() {
 
+    // Anonymous Class활용 예 2
+    // => 오직 한개의 인스턴스만 생성할 경우
+    // => return 문, 할당문, 파라미터 전달하는 곳에 놓기
+    //
+
+    // 메서드가 한개짜리 인터페이스일때만 람다 가능
+
+    //컬렉션의 값을 조회하는 일을 수행한다.
+    //
+    return new Iterator(){
+      int cursor;
+
+      @Override
+      public boolean hasNext() {
+        return cursor < LinkedList.this.size();
+      }
+
+      @Override
+      public Object next() {
+        return LinkedList.this.get(cursor++);
+        //    int temp = cursor;
+        //    cursor = cursor + 1;
+        //    return list.get(temp);
+      }
+    }; // => new ListIterator(this)
+  }
+
+  // Static Nested Class 활용 예
+  // => 특정 클래스 안에서만 사용되는 클래스일 때
+  // => 바깥 클래스의 인스턴스 멤버를 사용하지 않을 때
+  // 
+  private static class Node {
+    Node prev;
+    Object value;
+    Node next;
+
+    public Node(Object value) {
+      this.value = value;
+    }
+
+  }
 
 
 
