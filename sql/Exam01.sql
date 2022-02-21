@@ -212,11 +212,12 @@ DBMS 중에는 고정 크기인 컬럼의 값을 비교할 때 빈자리까지 �
   );
 
 입력 테스터:
-> insert into test1(c1) values('2017-11-21');
+> insert into test1(c1) values('2022-02-21');
 > insert into test1(c2) values('16:12:35');
-> insert into test1(c3) values('2017-9-7 16:5:3');
-> insert into test1(c1) values('2017-11-21 16:13:33'); /* 날짜 정보만 저장*/
-> insert into test1(c2) values('2017-11-21 16:13:33'); /* 시간 정보만 저장*/
+> insert into test1(c3) values('2022-2-21 16:5:3');
+> insert into test1(c1) values('2022-02-21 16:13:33'); /* 날짜 정보만 저장*/
+> insert into test1(c3) values('2022-02-21'); /* 시간 정보는 0을 설정된다.*/
+> insert into test1(c3) values('16:13:33'); /* 실행오류!*/
 
 #### boolean
 - 보통 true, false를 의미하는 값을 저장할 때는 정수 1 또는 0으로 표현한다.
@@ -251,21 +252,24 @@ DBMS 중에는 고정 크기인 컬럼의 값을 비교할 때 빈자리까지 �
 > insert into test1(c3) values('0'); /* false -> 0 */
 > insert into test1(c3) values(1); /* true -> 1 */
 > insert into test1(c3) values(0); /* false -> 0 */
+> insert into test1(c3) values(3); /* 가능하다.. 되도록이면 true false를 사용한다*/
 
 - 숫자 컬럼인 경우 값을 설정할 때 문자로 표현할 수 있다.
 - 즉 문자열을 숫자로 바꿀 수 있으면 된다.
 
 ### 키 컬럼 지정
 
+key column : 데이터를 구분할 때 사용하는 값
+
 테이블:
-- no, name, email, id, pwd, jumin, tel, postno, basic_addr, gender
+- name, email, jumin, id, tel, postno, basic_addr, gender
 
 #### key vs candidate key
 
 - key
   - 데이터를 구분할 때 사용하는 컬럼들의 집합
   - 예)
-    - {email}, {jumin}, {id}, {name, tel}, {tel, basic, gender, name}
+    - {email}, {jumin}, {id}, {name, tel}, {tel, basic_addr, gender, name}
     - {name, jumin}, {email, id}, {id, name, email} ...
 - candidate key (후보키 = 최소키)
   - key 들 중에서 최소 항목으로 줄인 키
@@ -399,7 +403,7 @@ DBMS 중에는 고정 크기인 컬럼의 값을 비교할 때 빈자리까지 �
 > insert into test1(no,name,age,kor,eng,math) values(5,'c',20,81,81,81);
 
 - 위와 같은 경우를 대비해 준비된 문법이 unique이다.
-- PK는 아니지만 PK처럼 중복을 허락하지 않는 컬럼을 지정할 때 사용한다.
+- PK는 아니지만 PK처럼 중복되어서는 안되는 컬럼을 지정할 때 사용한다.
 - 그래서 PK를 대신해서 사용할 수 있는 key라고 해서 "대안키(alternate key)"라고 부른다.
 - 즉 대안키는 DBMS에서 unique 컬럼으로 지정한다.
 
@@ -513,7 +517,7 @@ create table test1 (
 alter table test1
   add column no int;
 
-alter table test1 
+alter table test1
   add column age int;
 
 alter table test1
@@ -555,7 +559,7 @@ insert into test1(no,name,age,kor,eng,math,sum,aver)
 
 
 ### 컬럼 값 자동 증가
-- 숫자 타입의 PK 컬럼인 경우 값을 1씩 자동 증가시킬 수 있다.
+- 숫자 타입의 PK 컬럼 또는 unique 컬럼인 경우 값을 1씩 자동 증가시킬 수 있다.
 - 즉 데이터를 입력할 때 해당 컬럼의 값을 넣지 않아도 자동으로 증가된다.
 - 단 삭제를 통해 중간에 비어있는 번호는 다시 채우지 않는다.
   즉 증가된 번호는 계속 앞으로 증가할 뿐이다.
@@ -671,13 +675,13 @@ drop view worker;
 
 1) 테이블의 제약 조건 조회
 
-select table_name, constraint_name, constraint_type 
+select table_name, constraint_name, constraint_type
 from table_constraints;
 
 
 2) 테이블의 키 컬럼 정보 조회
 
-select table_name, column_name, constraint_name 
+select table_name, column_name, constraint_name
 from key_column_usage;
 
 
@@ -688,6 +692,5 @@ select
   t2.column_name,
   t2.constraint_name,
   t1.constraint_type
-from table_constraints t1 
+from table_constraints t1
   inner join key_column_usage t2 on t2.constraint_name=t1.constraint_name;
-
