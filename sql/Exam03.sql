@@ -34,8 +34,8 @@ select * from test1;
 select 컬럼명,컬럼명 from 테이블;
 select no, name, tel from test1;
 
-/* 가상의 컬럼 값을 조회하기*/
-select no, concat(name,'(',class,')') from test1;
+/* 만들어낸 가상의 컬럼 값을 조회하기*/
+select no, concat(name,'(',class,')') from test1; /*concat mysql 함수 문자열을 연결하는 함수 */
 
 
 ### 조회하는 컬럼에 별명 붙이기
@@ -306,10 +306,9 @@ insert into test1 (title, regdt) values('aaaa', '2017-11-22');
 /* 다음 형식의 문자열을 날짜 값으로 지정할 수 없다.*/
 insert into test1 (title, regdt) values('bbbb', '11/22/2017');
 
-/* 특정 형식으로 입력된 날짜를 date 타입의 컬럼 값으로 변환하면 입력할 수 있다.*/ 
+/* 특정 형식으로 입력된 날짜를 date 타입의 컬럼 값으로 변환하면 입력할 수 있다.*/
 insert into test1 (title, regdt) values('bbbb', str_to_date('11/22/2017', '%m/%d/%Y'));
 
 /* 위 형식의 문자열을 날짜 값으로 저장하려면 str_to_date() 함수를 사용해야 한다.*/
 insert into test1 (title, regdt)
   values('bbbb', str_to_date('11/22/2017', '%m/%d/%Y'));
-
