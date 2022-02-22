@@ -649,6 +649,7 @@ select no, name, class from test1 where working = 'Y';
 
 
 - 직장인만 조회한 결과를 가상 테이블로 만들기
+- create view 이름
 
 create view worker
   as select no, name, class from test1 where working = 'Y';
@@ -657,12 +658,12 @@ create view worker
 - view가 참조하는 테이블에 데이터를 입력한 후 view를 조회하면?
   => 새로 추가된 컬럼이 함께 조회된다.
 - 뷰를 조회할 때 마다 매번 select 문장을 실행한다.
-  => 미리 결과를 만들어 놓는 것이 아니다.
+  => 미리 결과를 만들어 놓는 것이 아니다. 테이블로 만들어 놓은 것이 아니다.
 - 일종의 조회 함수 역할을 한다.
 - 목적은 복잡한 조회를 가상의 테이블로 표현할 수 있어 SQL문이 간결해진다.
 
 insert into test1(name,class,working) values('ppp','java101','Y');
-select * from worker;
+select * from worker; /* 추가된 values도 view에 나타난다. => view 는 select에 대한 링크인 것이다. */
 
 
 ### 뷰 삭제
