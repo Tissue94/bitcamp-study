@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS addr RESTRICT;
 -- 강의배정
 DROP TABLE IF EXISTS lect_tcher RESTRICT;
 
--- 수강생
+-- 수강생  /* 데이터가 중복되지 않도록 데이터를 분산시킨다. 유지보수에도 편하다 */
 CREATE TABLE stnt (
     mno    INTEGER     NOT NULL COMMENT '수강생번호', -- 수강생번호
     work   CHAR(1)     NOT NULL COMMENT '재직여부', -- 재직여부
