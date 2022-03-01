@@ -36,7 +36,8 @@ select m.mno, name, s.mno, work, bank
 from memb m, stnt as s;
 
 
-/* natural join: 같은 이름을 가진 컬럼 값을 기준으로 레코드를 연결한다. */
+/* natural join: 같은 이름을 가진 컬럼 값을
+ 기준으로 레코드를 연결한다. */
 select m.mno, name, s.mno, work, bank
 from memb m natural join stnt s;
 
@@ -144,6 +145,7 @@ select mno, name
 from memb;
 
 -- 2) 학생 데이터를 가져와서 연결하기
+/* 모두 natural join과 결과가 같다 */
 select mno, name, work
 from memb natural join stnt;
 

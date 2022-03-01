@@ -7,8 +7,9 @@ select all loc from room;
 select loc from room;
 
 /* 중복 값을 한 개만 추출할 때 distinct 를 붙인다.*/
-select distinct loc from room;  
+select distinct loc from room;
 
-/* 컬럼이 2 개 이상일 때 
+/* 컬럼이 2 개 이상일 때
     그 컬럼들의 값이 중복될 경우만 한 개로 간주한다.*/
 select distinct loc, name from room;
+/* 중복된 데이터를 추려낼 때 사용 가능 */ 
