@@ -254,3 +254,28 @@ from lect_appl la
         left outer join room r on l.rno=r.rno
         left outer join memb m2 on l.mno=m2.mno
         left outer join mgr mr on l.mno=mr.mno;
+
+
+
+/* join 훈련 */
+/* 수강신청번호, 강의명, 학생명, 재직여부, 수강신청일, 강의실명, 매니저명, 직위 */
+/* 무조건 두 데이터의 관계가 존재할 수 밖에 없는 상황 inner join
+    관계가 없어 데이터가 빠질 수 있는 상황 outer join*/
+
+select
+  la.lano,
+  /* date_format(la.rdt, '%Y-%m-%d') reg_date,*/
+  to_char(la.rdt, 'YYYY-MM-DD') reg_date,
+  l.titl,
+  m.name student_name,
+  s.work,
+  ifnull(r.name, '') room_name, /* coalesce r.name이 null이면 , 이하로 치환 */
+  ifnull(m2.name, '') manager_name,
+  ifnull(mr.posi, '') manager_posi
+from lect_appl la
+  inner join lect l on la.lno=l.lno
+  inner join memb m on la.mno=m.mno
+  inner join stnt s on la.mno=s.mno
+  left outer join room r on l.rno=r.rno
+  left outer join memb m2 on l.mno=m2.mno
+  left outer join mgr mr on l.mno=mr.mno;
