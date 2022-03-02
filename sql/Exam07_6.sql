@@ -180,6 +180,38 @@ from lect_appl la;
 
 -- 서브쿼리 예2 : from 절에 서브쿼리를 둘 때
 
+-- 강의정보
+select
+  l.lno lect_no,
+  l.titl lect_title,
+  ifnull((select name from room where rno=l.rno), '') room_name,
+  ifnull((select name from memb where mno=l.mno), '') mgr_name,
+  ifnull((select posi from mgr where mno=l.mno), '') mgr_posi
+from
+  lect l;
+
+
+-- 수강생 정보
+
+select
+  mno,
+  name,
+  work
+from
+  stnt s;
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- 1)강의정보
 select
   l.lno lect_no,
