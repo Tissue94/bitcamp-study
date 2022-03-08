@@ -18,18 +18,16 @@ public class BookController {
   }
 
   @RequestMapping("/book/add")
-  public Object add(Book book) throws Exception{
+  public Object add(Book book) throws Exception {
     bookDao.insert(book);
     return bookDao.countAll();
   }
 
+
   @RequestMapping("/book/get")
-  public Object get(int index) throws Exception{
+  public Object get(int index) {
     Book book = bookDao.findByNo(index);
-    if (book == null) {
-      return "";
-    }
-    return book;
+    return book != null ? book : "";
   }
 
   @RequestMapping("/book/update")
@@ -42,15 +40,13 @@ public class BookController {
   }
 
   @RequestMapping("/book/delete")
-  public Object delete(int index) throws Exception{
+  public Object delete(int index) throws Exception {
     Book old = bookDao.findByNo(index);
     if (old == null) {
       return 0;
     }
-
     return bookDao.delete(index);
   }
-
 }
 
 

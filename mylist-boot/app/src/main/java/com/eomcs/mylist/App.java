@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class App {
 
   public static void main(String[] args) {
-    SpringApplication.run(App.class, args); //스프링부트를 실행하는 명령
+    SpringApplication.run(App.class, args);
   }
 
   //@Bean
@@ -22,10 +22,9 @@ public class App {
       System.out.println("빈 컨테이너가 생성한 객체(빈 컨테이너에 들어 있는 객체):");
 
       String[] beanNames = beanContainer.getBeanDefinitionNames();
-
       for (int i = 0; i < beanNames.length; i++) {
         Object bean = beanContainer.getBean(beanNames[i]);
-        System.out.printf("------>  %03d: %s\n", i + 1, bean.getClass().getName());
+        System.out.printf("----> %03d: %s\n", i + 1, bean.getClass().getName());
       }
 
     };

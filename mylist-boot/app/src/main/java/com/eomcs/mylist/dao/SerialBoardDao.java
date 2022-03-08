@@ -6,19 +6,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import com.eomcs.util.ArrayList;
+import java.util.ArrayList;
 
 //@Repository
-public class SerialBoardDao extends AbstractBoardDao{
+public class SerialBoardDao extends AbstractBoardDao {
 
   String filename = "boards.ser";
-
 
   public SerialBoardDao() {
     try {
       ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
-
-      // 객체를 통채로 읽어들임
       boardList = (ArrayList) in.readObject();
       in.close();
     } catch (Exception e) {
@@ -27,13 +24,21 @@ public class SerialBoardDao extends AbstractBoardDao{
   }
 
   @Override
-  protected void save() throws Exception{
+  protected void save() throws Exception {
     ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filename)));
-
     out.writeObject(boardList);
-
     out.flush();
-
     out.close();
   }
 }
+
+
+
+
+
+
+
+
+
+
+
