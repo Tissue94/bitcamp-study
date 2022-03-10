@@ -14,6 +14,9 @@ repositories {
 }
 
 dependencies {
+  // MariaDB JDBC 드라이버
+  implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
+  
   implementation 'org.springframework.boot:spring-boot-starter-web'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -23,6 +26,7 @@ test {
   useJUnitPlatform()
 }
 
+// eclipse 프로젝트 이름을 설정하기
 eclipse {
     project {
         name = "mylist-boot"
