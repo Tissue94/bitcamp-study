@@ -16,12 +16,14 @@ console.log(plus(10, 20));
 var ok;
 console.log(ok);
 
-
-var ok = plus;
+ok = plus;
 console.log(ok(100, 200));
 
 var haha = ok;
 console.log(haha(1000, 2000));
+
+ok = "Hello";
+ok(100, 200);
 
 </script>
 </body>

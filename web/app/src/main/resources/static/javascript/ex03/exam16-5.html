@@ -5,7 +5,7 @@
 <title>ex03</title>
 </head>
 <body>
-<h1>자바스크립트 주요 함수 - JSON.parse(JSON형식 문자열)</h1>
+<h1>자바스크립트 주요 함수 - JSON.parse(JSON형식문자열)</h1>
 <textarea id="ta" cols="80" rows="10"></textarea>
 <button id="btn1">실행</button>
 <script>
@@ -40,7 +40,7 @@ var ta = document.getElementById("ta");
 
 document.getElementById("btn1").onclick = () => {
 	var str = ta.value;
-    var obj = JSON.parse(str); // JSON 형식의 무자열 ==변환==> 자바스크립트 객체
+  var obj = JSON.parse(str); // JSON 형식의 문자열 ===변환===> 자바스크립트 객체
 	console.log(obj);
 
 	// 1) 단일 객체 생성

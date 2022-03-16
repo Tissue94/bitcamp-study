@@ -15,26 +15,38 @@
 //
 // document 객체
 // => 웹브라우저에서 기본으로 제공하는 객체이다.
-// => 태그를 찾고 생성하고 제어하는 등의 관련된 함수를 갖고 있다.
+// => 태그를 찾고, 생성하고, 제어하는 함수를 갖고 있다.
 // => var document = new HTMLDocument();
 //
 
 // document의 타입은?
-// ==> 즉 document 객체를 초기화시킨 생성자는?
-
+// => 즉 document 객체를 초기화시킨 생성자는?
 console.log(document.constructor.name);
 
-console.log(document); // HTML이 들어있다.
+// document 객체를 통해 사용할 수 있는 함수나 변수는?
+// => HTMLDocument 생성자가 추가한 함수나 변수이다.
+// => 어떤 함수와 변수가 있는지 알고 싶다면 문서 보세요.
+// => HTMLDocument 생성자의 문서를 보라!
+// => 상속 관계
+//    Document() --> Node() ---> EventTarget() ---> Object()
+
+console.log(document);
 
 console.log(Document.prototype);
 
-console.log(document.createElement);
+// Document()의 함수
+console.log(document.createElement); // document ---> Document.prototype
 
-console.log(document.appendChild);
+// Node()의 함수
+console.log(document.appendChild); // document ---> Document.prototype ---> Node.prototype
 
-console.log(document.addEventListener);
+// EventTarget()의 함수
+console.log(document.addEventListener); // document ---> Document.prototype ---> Node.prototype ---> EventTarget.prototype
 
-console.log(document.toString);
+// Object()의 함수
+console.log(document.toString); // document ---> Document.prototype ---> Node.prototype ---> EventTarget.prototype ---> Object.prototype
+
+
 
 
 </script>

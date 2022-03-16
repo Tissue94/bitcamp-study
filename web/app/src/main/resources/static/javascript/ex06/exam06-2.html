@@ -15,12 +15,12 @@
 
 <form action="https://www.daum.net">
   <input type="text" name="title">
-  <button type="button">전송2</button>
+  <button type="submit">전송2</button>
 </form>
 
 <form action="https://www.daum.net">
   <input type="text" name="title">
-  <input type="button" value="전송3">
+  <input type="submit" value="전송3">
 </form>
 
 <hr>
@@ -62,11 +62,11 @@
 
 document.querySelector("#form2").onsubmit = () => {
   return false;
-}
+};
 
 document.querySelector("#form3").onsubmit = (e) => {
   e.preventDefault();
-}
+};
 
 document.querySelector("#form4").addEventListener("submit", (e) => {
   e.preventDefault();
