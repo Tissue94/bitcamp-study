@@ -1,21 +1,24 @@
-### 14.1 자바스크립트 템플릿 엔진 도입 : Handlebars 템플릿 엔진 적용
+### 17.1 Lombok 적용
 
-- 자바스크립트 코드에서 HTML 코드를 분리하기
-- HTML 템플릿을 이용하여 HTML을 생성하기
+- Lombok 라이브러리를 이용하여 도메인 객체를 간결하게 다루기
 
 ## 백엔드 개발 실습
 
+### 1단계 - lombok 라이브러리를 프로젝트에 추가한다.
+
+- 빌드 스크립트 파일(build.gradle)에 lombok 라이브러리 추가
+  - build.gradle 변경
+    - dependencies {} 블록에 `id "io.freefair.lombok" version "6.4.1"` 플러그인 추가
+  - `java -jar lombok.jar` 파일 실행하여 이클립스 IDE에 lombok 기능 추가
+
+
+### 2단계 - 도메인 클래스에 lombok 을 적용한다.
+
+- com.eomcs.mylist.domain.* 클래스 변경
+  - 게터/세터, toString(), 생성자 제거
+  - @Data 애노테이션 추가
 
 ## 프론트엔드 개발 실습
-
-### 1단계 - 자바스크립트 템플릿 엔진을 추가한다.
-
-- Handlerbars 자바스크립트 라이브러리 추가(/src/main/resources/static/)
-  - `npm install handlebars` 실행한다.
-
-### 2단계 - 템플릿 엔진을 연락처 목록 화면에 적용한다.
-
-- /src/main/resources/static/contact/index.html 변경 
 
 
 #
